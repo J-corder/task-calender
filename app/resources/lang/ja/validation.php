@@ -153,6 +153,10 @@ return [
     |
     */
 
-    'attributes' => [],
+    'attributes' => [
+        'content' => 'タスク',
+        'start' => '開始日',
+        'end' => '終了日'
+    ],
 
 ];

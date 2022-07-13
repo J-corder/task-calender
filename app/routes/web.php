@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,16 +14,25 @@ use Inertia\Inertia;
 */
 
 Route::get('/', function () {
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
+    return view('welcome');
 });
 
 Route::get('/dashboard', function () {
-    return Inertia::render('Dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
+    return view('dashboard');
+})->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+
+Route::get('/sample/{id}', \App\Http\Controllers\Sample\IndexController::class);
+Route::get('/task', \App\Http\Controllers\Task\IndexController::class)
+->name('task.index');
+Route::get('/task/add', \App\Http\Controllers\Task\AddController::class)
+->name('task.add');
+Route::post('/task/create', \App\Http\Controllers\Task\CreateController::class)
+->name('task.create');
+Route::get('/task/update/{taskId}', \App\Http\Controllers\Task\Update\IndexController::class)
+->name('task.update.index');
+Route::put('/task/update/{taskId}', \App\Http\Controllers\Task\Update\PutController::class)
+->name('task.update.put');
+Route::put('/task/completed/{taskId}', \App\Http\Controllers\Task\CompletedController::class)
+->name('task/completed');
