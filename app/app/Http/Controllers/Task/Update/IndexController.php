@@ -19,6 +19,6 @@ class IndexController extends Controller
     {
         $taskId = (int) $request->route('taskId');
         $task = Task::where('id', $taskId)->firstOrFail();
-        dd($task);
+        return view('task.update')->with('task', $task);
     }
 }
