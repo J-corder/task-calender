@@ -35,4 +35,6 @@ Route::get('/task/update/{taskId}', \App\Http\Controllers\Task\Update\IndexContr
 Route::put('/task/update/{taskId}', \App\Http\Controllers\Task\Update\PutController::class)
 ->name('task.update.put');
 Route::put('/task/completed/{taskId}', \App\Http\Controllers\Task\CompletedController::class)
-->name('task/completed');
+->name('task.completed');
+Route::delete('/task/delete/{taskId}', \App\Http\Controllers\Task\DeleteController::class)
+->name('task.delete');

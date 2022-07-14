@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Task;
 
-class CompletedController extends Controller
+class DeleteController extends Controller
 {
     /**
      * Handle the incoming request.
@@ -16,10 +16,11 @@ class CompletedController extends Controller
      */
     public function __invoke(Request $request)
     {
-        $task = Task::where('id', $request->taskId)->firstOrFail();
-        $task->completed = !($task->completed);
-        $task->save();
+        $taskId = (int) $request->route('taskId');
+        $task = Task::where('id', $taskId)->firstOrFail();
+        $task->delete();
         return redirect()
-            ->route('task.index');
+            ->route('task.index')
+            ->with('feedback.success', "タスクを削除しました");
     }
 }

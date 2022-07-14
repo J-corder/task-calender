@@ -30,6 +30,11 @@ class UpdateRequest extends FormRequest
         ];
     }
 
+    public function id(): int
+    {
+        return (int) $this->route('taskId');
+    }
+
     public function content(): string
     {
         return $this->input('content');
