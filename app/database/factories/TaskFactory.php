@@ -17,6 +17,7 @@ class TaskFactory extends Factory
     public function definition()
     {
         return [
+            'user_id' => 1,
             'content' => $this->faker->realText(100),
             'start' => $this->faker->dateTimeBetween($startDate = 'now', $endDate = '+2 week'),
             'end' => $this->faker->dateTimeBetween($startDate = '+2 week', $endDate = '+4 week'),

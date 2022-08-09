@@ -17,7 +17,7 @@ class RouteServiceProvider extends ServiceProvider
      *
      * @var string
      */
-    public const HOME = '/dashboard';
+    public const HOME = '/enter';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -27,7 +27,7 @@ class RouteServiceProvider extends ServiceProvider
     public function boot()
     {
         Route::pattern('taskId', '[0-9]+');
-        
+
         $this->configureRateLimiting();
 
         $this->routes(function () {

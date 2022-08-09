@@ -1,0 +1,11 @@
+<div class="flex flex-wrap justify-center">
+    <div class="w-1/2 p-4 flex flex-wrap justify-evenly">
+        @auth
+            <x-element.button-a :href="route('task.index')">タスク一覧へ</x-element.button-a>
+        @endauth
+        @guest
+            <x-element.button-a :href="route('login')">ログイン</x-element.button-a>
+            <x-element.button-a :href="route('register')" theme="secondary">会員登録</x-element.button-a>
+        @endguest
+    </div>
+</div>

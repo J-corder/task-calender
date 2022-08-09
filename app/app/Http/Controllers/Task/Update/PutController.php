@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Requests\Task\UpdateRequest;
 use App\Models\Task;
+use App\Services\TaskService;
+use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 
 class PutController extends Controller
 {
@@ -15,8 +17,12 @@ class PutController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function __invoke(UpdateRequest $request)
+    public function __invoke(UpdateRequest $request, TaskService $taskService)
     {
+        if (!($taskService->checkOwnTask($request->user()->id, $request->id()))) {
+            throw new AccessDeniedHttpException();
+        }
+
         $task = Task::where('id', $request->id())->firstOrFail();
         $task->content = $request->content();
         $task->start = $request->start();

@@ -1,43 +1,15 @@
-<!DOCTYPE html>
-<html lang="ja">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>タスクカレンダー</title>
-</head>
-<body>
-    <h1>タスクカレンダー</h1>
-    <a href="{{ route('task.add') }}">タスク追加</a>
-    <div>
-    @foreach($tasks as $task)
-        <details>
-            <summary
-            @if($task->completed===1)
-                style="text-decoration: line-through;"
-            @endif
-            >{{ $task->content }}
-            <div>
-                <p>{{ $task->start }}</p>
-                <p>{{ $task->end }}</p>
-            </div>
-            </summary>
-            <div>
-                <a href="{{ route('task.update.index', ['taskId' => $task->id]) }}">編集</a>
-                {{-- <a href="{{ route('task.completed', ['taskId' => $task->id]) }}">完了</a> --}}
-                <form action="{{ route('task.completed', ['taskId' => $task->id]) }}" method="post">
-                    @method('PUT')
-                    @csrf
-                    <button type="submit">完了</button>
-                </form>
-                <form action="{{ route('task.delete', ['taskId' => $task->id]) }}" method="post">
-                    @method('DELETE')
-                    @csrf
-                    <button type="submit">削除</button>
-                </form>
-            </div>
-        </details>
-    @endforeach
-    </div>
-</body>
-</html>
+<x-layout title="TOP | タスクカレンダー">
+    <x-layout.single>
+        <h2 class="text-center text-blue-500 text-4xl font-bold mt-8 mb-8">
+            タスクカレンダー
+        </h2>
+        // タスク一覧の表示
+        // 最終的には月ごとの表示を目指す
+        // 表示月の切り替わりボタン
+        <div class="flex justify-between">
+            <x-element.input-date type="month"></x-element.input-date>
+            <x-element.button-a :href="route('task.add')">タスク追加</x-element.button-a>
+        </div>
+        <x-task.list :tasks="$tasks"></x-task.list>
+    </x-layout.single>
+</x-layout>

@@ -18,6 +18,7 @@ class CreateController extends Controller
     public function __invoke(CreateRequest $request)
     {
         $task = new Task;
+        $task->user_id = $request->userId();
         $task->content = $request->content();
         $task->start = $request->start();
         $task->end = $request->end();

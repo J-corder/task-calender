@@ -25,7 +25,7 @@ class UpdateRequest extends FormRequest
     {
         return [
             'content' => 'required|max:140',
-            'start' => 'required|date|after:yesterday',
+            'start' => 'required|date',
             'end' => 'required|date|after_or_equal:start',
         ];
     }
