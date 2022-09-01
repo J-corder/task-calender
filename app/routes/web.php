@@ -23,11 +23,12 @@ Route::get('/dashboard', function () {
 
 require __DIR__.'/auth.php';
 
+Route::get('/sample/{id}', \App\Http\Controllers\Sample\IndexController::class);
+
 Route::get('/enter', \App\Http\Controllers\Auth\EnterController::class)
     ->name('auth.enter');
 
 Route::group(['middleware' => ['auth']], function() {
-    Route::get('/sample/{id}', \App\Http\Controllers\Sample\IndexController::class);
     Route::get('/task', \App\Http\Controllers\Task\IndexController::class)
     ->name('task.index');
     Route::get('/task/add', \App\Http\Controllers\Task\AddController::class)
